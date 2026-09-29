@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Rol {
+  JOVEN
+  ASESOR
+  NACIONAL
+}
+
+enum EstadoExpediente {
+  INCOMPLETO
+  PENDIENTE
+  CORRECCION
+  VALIDADO
+}
+
+enum CategoriaDocumento {
+  PASAPORTE
+  CARTA_LIONS
+  SEGURO_MEDICO
+  CARTA_MEDICA
+}
+
+enum EstadoDocumento {
+  FALTANTE
+  PENDIENTE
+  CORRECCION
+  VALIDADO
+}
+
+model Distrito {
+  id          String       @id @default(cuid())
+  nombre      String       @unique
+  usuarios    Usuario[]
+  expedientes Expediente[]
+  createdAt   DateTime     @default(now())
+}
+
+model Usuario {
+  id           String      @id @default(cuid())
+  nombre       String
+  email        String      @unique
+  passwordHash String
+  rol          Rol
+  distritoId   String?
+  distrito     Distrito?   @relation(fields: [distritoId], references: [id])
+  expediente   Expediente?
+  createdAt    DateTime    @default(now())
+}
+
+model Expediente {
+  id          String              @id @default(cuid())
+  usuarioId   String              @unique
+  usuario     Usuario             @relation(fields: [usuarioId], references: [id])
+  distritoId  String
+  distrito    Distrito            @relation(fields: [distritoId], references: [id])
+  estado      EstadoExpediente    @default(INCOMPLETO)
+  cupoAsignado String?
+  documentos  Documento[]
+  historial   HistorialEvento[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model Documento {
+  id           String             @id @default(cuid())
+  expedienteId String
+  expediente   Expediente         @relation(fields: [expedienteId], references: [id])
+  categoria    CategoriaDocumento
+  archivoUrl   String
+  nombreArchivo String
+  version      Int                @default(1)
+  estado       EstadoDocumento    @default(PENDIENTE)
+  comentario   String?
+  createdAt    DateTime           @default(now())
+}
+
+model HistorialEvento {
+  id           String     @id @default(cuid())
+  expedienteId String
+  expediente   Expediente @relation(fields: [expedienteId], references: [id])
+  mensaje      String
+  createdAt    DateTime   @default(now())
+}
