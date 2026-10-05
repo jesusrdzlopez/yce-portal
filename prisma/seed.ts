@@ -16,14 +16,20 @@ async function main() {
     create: { nombre: "Distrito B-2" },
   });
 
-  const passwordHash = await bcrypt.hash("cambia123", 10);
+  const seedPassword = process.env.SEED_PASSWORD;
+  if (!seedPassword || seedPassword.length < 8) {
+    console.log("SEED_PASSWORD no definido (mínimo 8 caracteres): se omite la creación de usuarios de prueba.");
+    return;
+  }
+  const passwordHash = await bcrypt.hash(seedPassword, 10);
 
+  const emailNacional = process.env.SEED_NACIONAL_EMAIL ?? "nacional@ycemexico.org";
   await prisma.usuario.upsert({
-    where: { email: "nacional@ycemexico.org" },
+    where: { email: emailNacional },
     update: {},
     create: {
       nombre: "Coordinación Nacional",
-      email: "nacional@ycemexico.org",
+      email: emailNacional,
       passwordHash,
       rol: "NACIONAL",
     },
@@ -71,8 +77,8 @@ async function main() {
     create: { usuarioId: joven.id, distritoId: distritoUno.id },
   });
 
-  console.log("Seed completo. Usuarios de prueba (contraseña: cambia123):");
-  console.log("- nacional@ycemexico.org (NACIONAL)");
+  console.log("Seed completo. Usuarios de prueba (contraseña: la de SEED_PASSWORD):");
+  console.log(`- ${emailNacional} (NACIONAL)`);
   console.log(`- ${asesorUno.email} (ASESOR, ${distritoUno.nombre})`);
   console.log("- asesor2@ycemexico.org (ASESOR, Distrito B-2)");
   console.log("- joven1@ycemexico.org (JOVEN, Distrito A-1)");

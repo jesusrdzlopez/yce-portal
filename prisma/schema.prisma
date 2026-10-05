@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -77,7 +77,7 @@ model Documento {
   nombreArchivo String
   version      Int                @default(1)
   estado       EstadoDocumento    @default(PENDIENTE)
-  comentario   String?
+  comentario   String?            @db.Text
   createdAt    DateTime           @default(now())
 }
 
@@ -85,6 +85,6 @@ model HistorialEvento {
   id           String     @id @default(cuid())
   expedienteId String
   expediente   Expediente @relation(fields: [expedienteId], references: [id])
-  mensaje      String
+  mensaje      String     @db.Text
   createdAt    DateTime   @default(now())
 }
