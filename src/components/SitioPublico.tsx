@@ -2,8 +2,10 @@ import Link from "next/link";
 
 const ENLACES = [
   { href: "/", texto: "Inicio" },
+  { href: "/programa", texto: "El programa" },
   { href: "/documentos", texto: "Documentos" },
   { href: "/directorio", texto: "Directorio" },
+  { href: "/faq", texto: "FAQ" },
 ];
 
 export default function SitioPublico({
