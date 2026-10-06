@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
@@ -19,9 +20,16 @@ export default async function Home() {
 
   return (
     <SitioPublico activo="/">
-      <section className="relative flex min-h-[calc(100vh-10rem)] items-center overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-amber-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl" />
+      <section className="relative flex min-h-[calc(100vh-10rem)] items-center overflow-hidden bg-blue-950 text-white">
+        <Image
+          src="/images/portada.webp"
+          alt="Jóvenes contemplando el atardecer sobre una ciudad de México"
+          fill
+          priority
+          unoptimized
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/85 via-blue-950/65 to-blue-950/90" />
 
         <div className="relative mx-auto max-w-4xl px-4 py-20 text-center">
           <p className="inline-block rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-amber-300">
