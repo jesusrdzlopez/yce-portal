@@ -3,7 +3,12 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { guardarArchivo } from "@/lib/storage";
 import { calcularEstadoExpediente } from "@/lib/expediente";
-import { CATEGORIAS_DOCUMENTO, NOMBRE_CATEGORIA } from "@/lib/catalogos";
+import {
+  CATEGORIAS_DOCUMENTO,
+  EXTENSIONES_POR_CATEGORIA,
+  NOMBRE_CATEGORIA,
+  type CategoriaDocumento,
+} from "@/lib/catalogos";
 import { enviarCorreo, plantillaDocumentoSubido } from "@/lib/mail";
 
 const TAMANO_MAXIMO = 10 * 1024 * 1024; // 10 MB
@@ -23,6 +28,14 @@ export async function POST(request: Request) {
   }
   if (!(archivo instanceof File)) {
     return NextResponse.json({ error: "Archivo faltante" }, { status: 400 });
+  }
+  const extension = archivo.name.slice(archivo.name.lastIndexOf(".")).toLowerCase();
+  const permitidas = EXTENSIONES_POR_CATEGORIA[categoria as CategoriaDocumento];
+  if (!permitidas.includes(extension)) {
+    return NextResponse.json(
+      { error: `Formato no permitido. Sube un archivo ${permitidas.join(", ")}` },
+      { status: 400 }
+    );
   }
   if (archivo.size > TAMANO_MAXIMO) {
     return NextResponse.json({ error: "El archivo supera 10 MB" }, { status: 400 });
@@ -62,7 +75,7 @@ export async function POST(request: Request) {
   });
 
   const todosLosDocumentos = [...expediente.documentos, documento];
-  const nuevoEstado = calcularEstadoExpediente(todosLosDocumentos);
+  const nuevoEstado = calcularEstadoExpediente(todosLosDocumentos, expediente.esMenor);
 
   await prisma.expediente.update({
     where: { id: expediente.id },

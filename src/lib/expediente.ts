@@ -1,5 +1,5 @@
 import type { Documento } from "@prisma/client";
-import { CATEGORIAS_DOCUMENTO } from "@/lib/catalogos";
+import { categoriasRequeridas } from "@/lib/catalogos";
 
 /** De cada categoría, se queda solo con la versión más reciente subida. */
 export function documentosVigentes(documentos: Documento[]): Documento[] {
@@ -14,13 +14,15 @@ export function documentosVigentes(documentos: Documento[]): Documento[] {
 }
 
 export function calcularEstadoExpediente(
-  documentos: Documento[]
+  documentos: Documento[],
+  esMenor: boolean
 ): "INCOMPLETO" | "PENDIENTE" | "CORRECCION" | "VALIDADO" {
-  const vigentes = documentosVigentes(documentos);
-
-  const faltanCategorias = CATEGORIAS_DOCUMENTO.some(
-    (cat) => !vigentes.some((d) => d.categoria === cat)
+  const requeridas = categoriasRequeridas(esMenor);
+  const vigentes = documentosVigentes(documentos).filter((d) =>
+    (requeridas as string[]).includes(d.categoria)
   );
+
+  const faltanCategorias = requeridas.some((cat) => !vigentes.some((d) => d.categoria === cat));
   if (faltanCategorias) return "INCOMPLETO";
 
   if (vigentes.some((d) => d.estado === "CORRECCION")) return "CORRECCION";

@@ -3,7 +3,13 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SubidaDocumento({ categoria }: { categoria: string }) {
+export default function SubidaDocumento({
+  categoria,
+  extensiones,
+}: {
+  categoria: string;
+  extensiones: string[];
+}) {
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -43,7 +49,7 @@ export default function SubidaDocumento({ categoria }: { categoria: string }) {
       <input
         ref={inputRef}
         type="file"
-        accept=".pdf,.jpg,.jpeg,.png"
+        accept={extensiones.join(",")}
         onChange={manejarCambio}
         disabled={enviando}
         className="block w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-800"

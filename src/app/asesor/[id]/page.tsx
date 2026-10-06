@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { documentosVigentes } from "@/lib/expediente";
 import {
-  CATEGORIAS_DOCUMENTO,
+  categoriasRequeridas,
   NOMBRE_CATEGORIA,
   NOMBRE_ESTADO_DOCUMENTO,
   colorSemaforo,
@@ -44,7 +44,7 @@ export default async function DetalleExpedienteAsesor({
         </div>
 
         <div className="space-y-4">
-          {CATEGORIAS_DOCUMENTO.map((categoria) => {
+          {categoriasRequeridas(expediente.esMenor).map((categoria) => {
             const doc = vigentes.find((d) => d.categoria === categoria);
             const color = doc ? colorSemaforo(doc.estado) : "rojo";
 

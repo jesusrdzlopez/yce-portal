@@ -39,7 +39,10 @@ export async function POST(
   const documentosActualizados = documento.expediente.documentos.map((d) =>
     d.id === id ? documentoActualizado : d
   );
-  const nuevoEstado = calcularEstadoExpediente(documentosActualizados);
+  const nuevoEstado = calcularEstadoExpediente(
+    documentosActualizados,
+    documento.expediente.esMenor
+  );
 
   await prisma.expediente.update({
     where: { id: documento.expedienteId },

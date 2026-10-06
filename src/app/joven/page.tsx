@@ -1,16 +1,19 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { documentosVigentes } from "@/lib/expediente";
+import Link from "next/link";
 import {
-  CATEGORIAS_DOCUMENTO,
+  EXTENSIONES_POR_CATEGORIA,
   NOMBRE_CATEGORIA,
   NOMBRE_ESTADO_DOCUMENTO,
+  categoriasRequeridas,
   colorSemaforo,
   CLASES_SEMAFORO,
 } from "@/lib/catalogos";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
 import Semaforo from "@/components/Semaforo";
 import SubidaDocumento from "@/components/SubidaDocumento";
+import InterruptorMenor from "@/components/InterruptorMenor";
 
 export default async function JovenPage() {
   const session = await auth();
@@ -43,8 +46,12 @@ export default async function JovenPage() {
           <Semaforo estado={expediente.estado} />
         </div>
 
+        <div className="mb-6">
+          <InterruptorMenor esMenorInicial={expediente.esMenor} />
+        </div>
+
         <div className="space-y-4">
-          {CATEGORIAS_DOCUMENTO.map((categoria) => {
+          {categoriasRequeridas(expediente.esMenor).map((categoria) => {
             const doc = vigentes.find((d) => d.categoria === categoria);
             const color = doc ? colorSemaforo(doc.estado) : "rojo";
 
@@ -75,8 +82,17 @@ export default async function JovenPage() {
                   </a>
                 )}
 
+                {categoria === "SOLICITUD" && (
+                  <Link href="/documentos" className="mt-2 inline-block text-sm text-blue-700 underline">
+                    Descarga el formato de solicitud
+                  </Link>
+                )}
+
                 <div className="mt-3">
-                  <SubidaDocumento categoria={categoria} />
+                  <SubidaDocumento
+                    categoria={categoria}
+                    extensiones={EXTENSIONES_POR_CATEGORIA[categoria]}
+                  />
                 </div>
               </div>
             );

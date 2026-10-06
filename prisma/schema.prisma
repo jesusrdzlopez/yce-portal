@@ -21,7 +21,14 @@ enum EstadoExpediente {
 }
 
 enum CategoriaDocumento {
+  SOLICITUD
+  CARTA_PRESENTACION
   PASAPORTE
+  FOTO
+  FORMATO_SAM
+  SEGURO_VIAJE
+  COMPROBANTE_PAGO
+  // Valores heredados sin uso: se conservan para que la migracion no borre datos.
   CARTA_LIONS
   SEGURO_MEDICO
   CARTA_MEDICA
@@ -62,6 +69,7 @@ model Expediente {
   distrito    Distrito            @relation(fields: [distritoId], references: [id])
   estado      EstadoExpediente    @default(INCOMPLETO)
   cupoAsignado String?
+  esMenor     Boolean             @default(true)
   documentos  Documento[]
   historial   HistorialEvento[]
   createdAt   DateTime            @default(now())
