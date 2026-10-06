@@ -4,6 +4,7 @@ declare module "next-auth" {
   interface User {
     rol?: "JOVEN" | "ASESOR" | "NACIONAL";
     distritoId?: string | null;
+    debeCambiarPassword?: boolean;
   }
 
   interface Session {
@@ -11,6 +12,7 @@ declare module "next-auth" {
       id: string;
       rol: "JOVEN" | "ASESOR" | "NACIONAL";
       distritoId: string | null;
+      debeCambiarPassword: boolean;
     } & DefaultSession["user"];
   }
 }
@@ -20,5 +22,6 @@ declare module "next-auth/jwt" {
     id: string;
     rol: "JOVEN" | "ASESOR" | "NACIONAL";
     distritoId: string | null;
+    debeCambiarPassword: boolean;
   }
 }

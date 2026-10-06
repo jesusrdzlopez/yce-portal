@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { iniciarSesion } from "./actions";
 
 export default async function LoginPage({
@@ -57,6 +58,17 @@ export default async function LoginPage({
             Entrar
           </button>
         </form>
+
+        <p className="mt-6 text-center text-sm text-slate-600">
+          ¿Eres participante y aún no tienes cuenta?{" "}
+          <Link href="/registro" className="font-semibold text-blue-800 underline">
+            Crear cuenta
+          </Link>
+        </p>
+        <p className="mt-2 text-center text-xs text-slate-500">
+          ¿Olvidaste tu contraseña? Pide a tu asesor de distrito o a coordinación nacional que la
+          restablezca.
+        </p>
       </div>
     </main>
   );

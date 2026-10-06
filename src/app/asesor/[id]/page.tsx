@@ -12,6 +12,8 @@ import {
 import EncabezadoPortal from "@/components/EncabezadoPortal";
 import Semaforo from "@/components/Semaforo";
 import AccionesDocumento from "@/components/AccionesDocumento";
+import BotonRestablecer from "@/components/BotonRestablecer";
+import { restablecerPasswordJoven } from "./actions";
 
 export default async function DetalleExpedienteAsesor({
   params,
@@ -42,6 +44,15 @@ export default async function DetalleExpedienteAsesor({
           <p className="text-sm text-slate-500">{expediente.usuario.email}</p>
           <Semaforo estado={expediente.estado} />
         </div>
+
+        {session.user.rol === "ASESOR" && (
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-4">
+            <p className="mb-2 text-sm text-slate-600">
+              ¿El participante olvidó su contraseña? Genera una temporal y entrégasela.
+            </p>
+            <BotonRestablecer usuarioId={expediente.usuarioId} accion={restablecerPasswordJoven} />
+          </div>
+        )}
 
         <div className="space-y-4">
           {categoriasRequeridas(expediente.esMenor).map((categoria) => {

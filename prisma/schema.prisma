@@ -59,6 +59,8 @@ model Usuario {
   distritoId   String?
   distrito     Distrito?   @relation(fields: [distritoId], references: [id])
   expediente   Expediente?
+  activo       Boolean     @default(true)
+  debeCambiarPassword Boolean @default(false)
   createdAt    DateTime    @default(now())
 }
 

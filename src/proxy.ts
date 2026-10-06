@@ -11,6 +11,10 @@ export default auth((req) => {
     return NextResponse.redirect(loginUrl);
   }
 
+  if (req.auth.user.debeCambiarPassword && !pathname.startsWith("/cuenta")) {
+    return NextResponse.redirect(new URL("/cuenta/password", req.url));
+  }
+
   if (pathname.startsWith("/joven") && rol !== "JOVEN") {
     return NextResponse.redirect(new URL("/", req.url));
   }
@@ -25,5 +29,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/joven/:path*", "/asesor/:path*", "/nacional/:path*"],
+  matcher: ["/joven/:path*", "/asesor/:path*", "/nacional/:path*", "/cuenta/:path*"],
 };
