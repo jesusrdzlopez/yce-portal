@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import SitioPublico from "@/components/SitioPublico";
 import AvisoBorrador from "@/components/AvisoBorrador";
 
@@ -85,28 +84,6 @@ export default function ProgramaPage() {
                 <p className="mt-2 text-sm text-slate-600">{item.texto}</p>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section className="mt-16 rounded-3xl bg-blue-900 p-10 text-white">
-          <h2 className="text-2xl font-bold">¿Cómo participar?</h2>
-          <p className="mt-2 max-w-2xl text-blue-100">
-            Descarga los formatos, sube tu expediente desde el portal y tu asesor distrital lo
-            revisará.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/documentos"
-              className="rounded-xl bg-amber-400 px-6 py-3 text-center font-semibold text-blue-950 hover:bg-amber-300"
-            >
-              Descargar documentos
-            </Link>
-            <Link
-              href="/login"
-              className="rounded-xl border border-white/30 px-6 py-3 text-center font-semibold hover:bg-white/10"
-            >
-              Iniciar sesión
-            </Link>
           </div>
         </section>
       </div>

@@ -5,7 +5,7 @@ const ENLACES = [
   { href: "/programa", texto: "El programa" },
   { href: "/documentos", texto: "Documentos" },
   { href: "/directorio", texto: "Directorio" },
-  { href: "/faq", texto: "FAQ" },
+  { href: "/politicas", texto: "Políticas generales del programa" },
 ];
 
 export default function SitioPublico({
@@ -29,7 +29,7 @@ export default function SitioPublico({
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 sm:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {ENLACES.map((enlace) => (
               <Link
                 key={enlace.href}
@@ -53,7 +53,7 @@ export default function SitioPublico({
           </Link>
         </div>
 
-        <nav className="flex justify-center gap-1 border-t border-slate-100 px-2 py-1 sm:hidden">
+        <nav className="flex flex-wrap justify-center gap-1 border-t border-slate-100 px-2 py-1 lg:hidden">
           {ENLACES.map((enlace) => (
             <Link
               key={enlace.href}
