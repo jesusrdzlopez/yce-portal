@@ -31,7 +31,16 @@ export default async function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-blue-950/85 via-blue-950/65 to-blue-950/90" />
 
-        <div className="relative mx-auto max-w-4xl px-4 py-20 text-center">
+        <div className="relative mx-auto max-w-4xl px-4 py-16 text-center">
+          <Image
+            src="/logos/yce-mexico.webp"
+            alt="México · Youth Camps & Exchange"
+            width={640}
+            height={612}
+            priority
+            unoptimized
+            className="mx-auto mb-8 h-36 w-auto drop-shadow-2xl sm:h-44"
+          />
           <p className="inline-block rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-amber-300">
             Distrito Múltiple B México · 2026-2027
           </p>

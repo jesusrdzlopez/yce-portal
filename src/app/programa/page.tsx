@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SitioPublico from "@/components/SitioPublico";
-import AvisoBorrador from "@/components/AvisoBorrador";
 
 export const metadata: Metadata = { title: "El programa | YCE México" };
 
@@ -30,23 +30,31 @@ export default function ProgramaPage() {
   return (
     <SitioPublico activo="/programa">
       <section className="bg-gradient-to-br from-blue-950 to-blue-800 py-14 text-white">
-        <div className="mx-auto max-w-6xl px-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-amber-300">
-            El programa
-          </p>
-          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
-            Intercambios y Campamentos Juveniles
-          </h1>
-          <p className="mt-3 max-w-2xl text-blue-100">
-            Un programa de Lions para que jóvenes conozcan el mundo y construyan puentes entre
-            culturas.
-          </p>
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-amber-300">
+              El programa
+            </p>
+            <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+              Intercambios y Campamentos Juveniles
+            </h1>
+            <p className="mt-3 max-w-2xl text-blue-100">
+              Un programa de Lions para que jóvenes conozcan el mundo y construyan puentes entre
+              culturas.
+            </p>
+          </div>
+          <Image
+            src="/logos/yce-mexico.webp"
+            alt="México · Youth Camps & Exchange"
+            width={640}
+            height={612}
+            unoptimized
+            className="hidden h-36 w-auto shrink-0 drop-shadow-xl md:block"
+          />
         </div>
       </section>
 
       <div className="mx-auto max-w-6xl px-4 py-12">
-        <AvisoBorrador />
-
         <div className="grid gap-12 lg:grid-cols-2">
           <section>
             <h2 className="text-2xl font-bold text-slate-900">¿Qué es?</h2>

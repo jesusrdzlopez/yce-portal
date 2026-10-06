@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { iniciarSesion } from "./actions";
 
 export default async function LoginPage({
@@ -10,8 +11,16 @@ export default async function LoginPage({
   return (
     <main className="flex flex-1 items-center justify-center px-4">
       <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="text-xl font-semibold text-slate-900">Portal YCE México</h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <Image
+          src="/logos/yce-mexico.webp"
+          alt="México · Youth Camps & Exchange"
+          width={640}
+          height={612}
+          unoptimized
+          className="mx-auto mb-4 h-24 w-auto"
+        />
+        <h1 className="text-center text-xl font-semibold text-slate-900">Portal YCE México</h1>
+        <p className="mt-1 text-center text-sm text-slate-500">
           Programa de Intercambios y Campamentos Juveniles
         </p>
 

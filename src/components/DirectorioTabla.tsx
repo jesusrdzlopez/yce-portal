@@ -3,10 +3,6 @@
 import { useMemo, useState } from "react";
 import type { AsesorICJ } from "@/lib/directorio";
 
-function enlaceTelefono(telefono: string) {
-  return `tel:+52${telefono.replace(/\D/g, "")}`;
-}
-
 export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] }) {
   const [busqueda, setBusqueda] = useState("");
 
@@ -17,8 +13,7 @@ export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] })
       (a) =>
         a.distrito.toLowerCase().includes(termino) ||
         a.nombre.toLowerCase().includes(termino) ||
-        a.correo.toLowerCase().includes(termino) ||
-        (a.telefono ?? "").includes(termino)
+        a.correo.toLowerCase().includes(termino)
     );
   }, [asesores, busqueda]);
 
@@ -38,7 +33,6 @@ export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] })
               <th className="px-5 py-3 font-semibold">Distrito</th>
               <th className="px-5 py-3 font-semibold">Asesor ICJ</th>
               <th className="hidden px-5 py-3 font-semibold sm:table-cell">Correo</th>
-              <th className="hidden px-5 py-3 font-semibold md:table-cell">Teléfono</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -57,14 +51,6 @@ export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] })
                   >
                     {asesor.correo}
                   </a>
-                  {asesor.telefono && (
-                    <a
-                      href={enlaceTelefono(asesor.telefono)}
-                      className="mt-1 block text-sm text-blue-800 underline md:hidden"
-                    >
-                      {asesor.telefono}
-                    </a>
-                  )}
                 </td>
                 <td className="hidden px-5 py-4 align-top sm:table-cell">
                   <a
@@ -74,23 +60,11 @@ export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] })
                     {asesor.correo}
                   </a>
                 </td>
-                <td className="hidden px-5 py-4 align-top md:table-cell">
-                  {asesor.telefono ? (
-                    <a
-                      href={enlaceTelefono(asesor.telefono)}
-                      className="whitespace-nowrap text-blue-800 underline hover:text-blue-950"
-                    >
-                      {asesor.telefono}
-                    </a>
-                  ) : (
-                    <span className="text-slate-400">—</span>
-                  )}
-                </td>
               </tr>
             ))}
             {filtrados.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-5 py-8 text-center text-slate-500">
+                <td colSpan={3} className="px-5 py-8 text-center text-slate-500">
                   No se encontraron resultados.
                 </td>
               </tr>

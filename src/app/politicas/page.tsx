@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
+import Image from "next/image";
 import SitioPublico from "@/components/SitioPublico";
 import ItemPolitica from "@/components/ItemPolitica";
 import { APROBACION, BLOQUES, ELABORACION, FIRMAS, INTRO } from "@/lib/politicas";
@@ -21,26 +22,36 @@ export default function PoliticasPage() {
   return (
     <SitioPublico activo="/politicas">
       <section className="bg-gradient-to-br from-blue-950 to-blue-800 py-14 text-white">
-        <div className="mx-auto max-w-6xl px-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-amber-300">
-            MD B México 2026-2027
-          </p>
-          <h1 className="mt-2 text-3xl font-bold uppercase sm:text-4xl">
-            Políticas generales del programa
-          </h1>
-          <p className="mt-3 max-w-3xl text-blue-100">
-            Normas y Políticas del Programa de Campamentos e Intercambio Juveniles del Distrito
-            Múltiple B México.
-          </p>
-          {hayPdf && (
-            <a
-              href={`/documentos/${ARCHIVO_PDF}`}
-              download
-              className="mt-6 inline-block rounded-xl bg-amber-400 px-6 py-3 font-semibold text-blue-950 hover:bg-amber-300"
-            >
-              Descargar documento en PDF
-            </a>
-          )}
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-amber-300">
+              MD B México 2026-2027
+            </p>
+            <h1 className="mt-2 text-3xl font-bold uppercase sm:text-4xl">
+              Políticas generales del programa
+            </h1>
+            <p className="mt-3 max-w-3xl text-blue-100">
+              Normas y Políticas del Programa de Campamentos e Intercambio Juveniles del Distrito
+              Múltiple B México.
+            </p>
+            {hayPdf && (
+              <a
+                href={`/documentos/${ARCHIVO_PDF}`}
+                download
+                className="mt-6 inline-block rounded-xl bg-amber-400 px-6 py-3 font-semibold text-blue-950 hover:bg-amber-300"
+              >
+                Descargar documento en PDF
+              </a>
+            )}
+          </div>
+          <Image
+            src="/logos/yce-mexico.webp"
+            alt="México · Youth Camps & Exchange"
+            width={640}
+            height={612}
+            unoptimized
+            className="hidden h-36 w-auto shrink-0 drop-shadow-xl md:block"
+          />
         </div>
       </section>
 
