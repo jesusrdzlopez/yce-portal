@@ -6,7 +6,7 @@ import SitioPublico from "@/components/SitioPublico";
 export const metadata: Metadata = { title: "Documentos | YCE México" };
 
 const REQUISITOS = [
-  { texto: "Formato de solicitud lleno en Excel", archivo: "solicitud-yce.xlsx" },
+  { texto: "Formato de solicitud lleno en Excel", archivo: "Application-Form-2026.xlsx" },
   { texto: "Carta de presentación para la familia anfitriona" },
   { texto: "Pasaporte escaneado" },
   { texto: "Foto personal tamaño credencial" },
@@ -16,6 +16,7 @@ const REQUISITOS = [
   },
   { texto: "Seguro de viaje" },
   { texto: "Comprobante de pago del trámite" },
+  { texto: "Consentimiento y Aceptación de Condiciones de Participación firmado" },
 ];
 
 export default function DocumentosPage() {

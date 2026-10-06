@@ -154,15 +154,15 @@ export const BLOQUES: Bloque[] = [
       ),
       it(
         "2.",
-        "Toda solicitud de intercambio deberá tramitarse inicialmente por conducto del Asesor Distrital de Intercambio Juvenil correspondiente, quien verificará que la documentación requerida se encuentre completa y la remitirá al Asesor Nacional para su revisión y autorización."
+        "Toda solicitud de intercambio deberá tramitarse inicialmente por conducto del asesor distrital de CIJ correspondiente, quien verificará que la documentación requerida se encuentre completa y la remitirá al asesor nacional (asesor del distrito múltiple) para su revisión y autorización."
       ),
       it(
         "3.",
-        "La gestión y coordinación oficial de los intercambios internacionales entre México y otros países se realizará por conducto del Asesor Nacional de Intercambio Juvenil, quien será el enlace con los asesores nacionales y las estructuras autorizadas de los países participantes."
+        "La gestión y coordinación oficial de los intercambios internacionales entre México y otros países se realizará por conducto del asesor nacional de CIJ, quien será el enlace con los asesores nacionales y las estructuras autorizadas de los países participantes."
       ),
       it(
         "4.",
-        "Ningún club, participante o familia deberá formalizar directamente un intercambio internacional sin conocimiento y autorización de los asesores correspondientes, salvo en aquellos casos expresamente autorizados por el Asesor Nacional."
+        "Ningún club, participante o familia deberá formalizar directamente un intercambio internacional sin conocimiento y autorización de los asesores correspondientes, salvo en aquellos casos expresamente autorizados por el asesor nacional de CIJ."
       ),
     ],
   },
@@ -222,7 +222,7 @@ export const BLOQUES: Bloque[] = [
       ], "Elegibilidad"),
       it(
         "2.",
-        "Cada joven que solicite participar en el programa de campamentos debe estar patrocinado por un club de Leones, independientemente de si el club ayudará o no en los arreglos financieros. La solicitud debe tener la aprobación del presidente del club patrocinador, del asesor de CIJ de distrito y del asesor del distrito múltiple."
+        "Cada joven que solicite participar en el programa de campamentos debe estar patrocinado por un club de Leones, independientemente de si el club ayudará o no en los arreglos financieros. La solicitud debe tener la aprobación del presidente del club patrocinador, del asesor de CIJ de distrito y del asesor nacional."
       ),
       it(
         "3.",
@@ -801,18 +801,18 @@ export const BLOQUES: Bloque[] = [
     items: [
       it(
         "1.",
-        "A su regreso, será obligación del participante y de sus padres o tutores notificar su llegada al Asesor Nacional de Intercambio Juvenil, al Asesor Distrital correspondiente y al Club de Leones patrocinador."
+        "A su regreso, será obligación del participante y de sus padres o tutores notificar su llegada al asesor nacional de CIJ, al asesor distrital correspondiente y al club patrocinador."
       ),
       it(
         "2.",
-        "Dentro de los 60 días naturales posteriores a su regreso, el participante deberá entregar un testimonio de su experiencia en el Programa de Intercambio Juvenil. Este podrá presentarse en cualquiera de las siguientes modalidades:",
+        "Dentro de los 60 días naturales posteriores a su regreso, el participante deberá entregar un testimonio de su experiencia en el programa de CIJ. Este podrá presentarse en cualquiera de las siguientes modalidades:",
         [
           it("a.", "Reporte escrito"),
           it("b.", "Presentación digital"),
           it("c.", "Video"),
           it(
             "d.",
-            "Material audiovisual o informativo equivalente aprobado por el asesor de ICJ de distrito o del distrito múltiple B."
+            "Material audiovisual o informativo equivalente aprobado por el asesor distrital o nacional de CIJ."
           ),
         ]
       ),
@@ -836,8 +836,13 @@ export const BLOQUES: Bloque[] = [
     id: "fines-politicos",
     nivel: 4,
     titulo: "Programa de campamentos e intercambio juveniles con fines políticos",
+    parrafos: ["Queda expresamente prohibido el uso del programa CIJ y de sus contactos o funciones para fines políticos."],
+  },
+  {
+    id: "otros",
+    nivel: 4,
+    titulo: "Otros",
     parrafos: [
-      "Queda expresamente prohibido el uso del programa CIJ y de sus contactos o funciones para fines políticos.",
       "Cualquier situación, controversia o circunstancia no prevista en las presentes Políticas y Normas del Programa de Intercambio Juvenil será analizada y resuelta por el asesor de ICJ del distrito, en coordinación con el Presidente del Consejo de Gobernadores y en apego a las políticas y reglamentos vigentes de la Asociación Internacional de Clubes de Leones.",
       "Las presentes Políticas y Normas entrarán en vigor a partir de su aprobación por el Consejo de Gobernadores del Distrito Múltiple B México y permanecerán vigentes hasta que sean modificadas o sustituidas por una versión posterior debidamente aprobada.",
     ],
@@ -853,7 +858,7 @@ export const FIRMAS = [
 ];
 
 export const APROBACION = [
-  { distrito: "B1", gobernador: "C.L. Francisco Javier Pérez Ramos", asesor: "C.L. Elsa Lynn Sueños (Secretario del Distrito B1, en ausencia de Asesor ICJ)" },
+  { distrito: "B1", gobernador: "C.L. Francisco Javier Pérez Ramos", asesor: "C.L. Adrián Barrios Cumpas" },
   { distrito: "B2", gobernador: "C.L. María Engracia Barbosa Rodríguez", asesor: "C.L. María Del Rosario Pérez Castaneda" },
   { distrito: "B3", gobernador: "C.L. Rosa María Alvarado Monroy", asesor: "C.L. Patricia Flores" },
   { distrito: "B4", gobernador: "C.L. Simón Gutiérrez Rosas", asesor: "C.L. José Ismael Huerta Ledesma" },

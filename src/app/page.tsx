@@ -42,7 +42,7 @@ export default async function Home() {
             className="mx-auto mb-8 h-36 w-auto drop-shadow-2xl sm:h-44"
           />
           <p className="inline-block rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-amber-300">
-            Distrito Múltiple B México · 2026-2027
+            Distrito Múltiple B México
           </p>
           <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-6xl">
             Programa de Campamentos e{" "}

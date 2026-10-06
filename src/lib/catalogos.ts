@@ -6,6 +6,7 @@ export const CATEGORIAS_DOCUMENTO = [
   "FORMATO_SAM",
   "SEGURO_VIAJE",
   "COMPROBANTE_PAGO",
+  "CONSENTIMIENTO",
 ] as const;
 
 export type CategoriaDocumento = (typeof CATEGORIAS_DOCUMENTO)[number];
@@ -18,6 +19,7 @@ export const NOMBRE_CATEGORIA: Record<CategoriaDocumento, string> = {
   FORMATO_SAM: "Formato SAM (solo menores de edad)",
   SEGURO_VIAJE: "Seguro de viaje",
   COMPROBANTE_PAGO: "Comprobante de pago del trámite",
+  CONSENTIMIENTO: "Consentimiento y Aceptación de Condiciones de Participación (firmado)",
 };
 
 const EXTENSIONES_DOCUMENTO = [".pdf", ".jpg", ".jpeg", ".png"];
@@ -30,6 +32,7 @@ export const EXTENSIONES_POR_CATEGORIA: Record<CategoriaDocumento, string[]> = {
   FORMATO_SAM: EXTENSIONES_DOCUMENTO,
   SEGURO_VIAJE: EXTENSIONES_DOCUMENTO,
   COMPROBANTE_PAGO: EXTENSIONES_DOCUMENTO,
+  CONSENTIMIENTO: EXTENSIONES_DOCUMENTO,
 };
 
 /** El Formato SAM solo se exige a participantes menores de edad. */

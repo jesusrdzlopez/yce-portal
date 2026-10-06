@@ -28,6 +28,7 @@ enum CategoriaDocumento {
   FORMATO_SAM
   SEGURO_VIAJE
   COMPROBANTE_PAGO
+  CONSENTIMIENTO
   // Valores heredados sin uso: se conservan para que la migracion no borre datos.
   CARTA_LIONS
   SEGURO_MEDICO
