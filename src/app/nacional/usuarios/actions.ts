@@ -6,11 +6,12 @@ import { z } from "zod";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { generarPasswordTemporal } from "@/lib/password";
-import { restablecerPasswordUsuario } from "@/lib/usuarios";
+import { restablecerPasswordUsuario, type Credenciales } from "@/lib/usuarios";
+import { etiquetaDistrito } from "@/lib/distritos";
 
 export type EstadoUsuario = {
   error?: string;
-  credenciales?: { nombre: string; email: string; passwordTemporal: string };
+  credenciales?: Credenciales;
 };
 
 async function exigirNacional() {
@@ -42,10 +43,12 @@ export async function crearUsuario(
 
   const { rol, nombre, email, distritoId } = datos.data;
 
+  let etiqueta = "Coordinación nacional";
   if (rol === "ASESOR") {
     if (!distritoId) return { error: "Elige el distrito del asesor." };
     const distrito = await prisma.distrito.findUnique({ where: { id: distritoId } });
     if (!distrito) return { error: "Distrito no válido." };
+    etiqueta = etiquetaDistrito(distrito.nombre);
   }
 
   if (await prisma.usuario.findUnique({ where: { email } })) {
@@ -65,7 +68,7 @@ export async function crearUsuario(
   });
 
   revalidatePath("/nacional/usuarios");
-  return { credenciales: { nombre, email, passwordTemporal } };
+  return { credenciales: { nombre, distrito: etiqueta, email, passwordTemporal } };
 }
 
 export async function restablecerPassword(
@@ -77,14 +80,7 @@ export async function restablecerPassword(
     { id: session.user.id, rol: session.user.rol, distritoId: session.user.distritoId },
     String(formData.get("usuarioId") ?? "")
   );
-  if (!resultado.ok) return { error: resultado.error };
-  return {
-    credenciales: {
-      nombre: resultado.nombre,
-      email: resultado.email,
-      passwordTemporal: resultado.passwordTemporal,
-    },
-  };
+  return resultado.ok ? { credenciales: resultado.credenciales } : { error: resultado.error };
 }
 
 export async function cambiarActivo(formData: FormData) {

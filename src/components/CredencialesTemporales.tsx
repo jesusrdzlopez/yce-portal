@@ -1,20 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import type { Credenciales } from "@/lib/usuarios";
 
 export default function CredencialesTemporales({
   nombre,
+  distrito,
   email,
   passwordTemporal,
-}: {
-  nombre: string;
-  email: string;
-  passwordTemporal: string;
-}) {
+}: Credenciales) {
   const [copiado, setCopiado] = useState(false);
 
   async function copiar() {
-    const texto = `Portal YCE México\nUsuario: ${email}\nContraseña temporal: ${passwordTemporal}\nAl entrar, el sistema te pedirá elegir una contraseña nueva.`;
+    const texto = [
+      "Portal YCE México",
+      `Nombre: ${nombre}`,
+      `Distrito: ${distrito}`,
+      `Usuario: ${email}`,
+      `Contraseña temporal: ${passwordTemporal}`,
+      "Al entrar, el sistema te pedirá elegir una contraseña nueva.",
+    ].join("\n");
     await navigator.clipboard.writeText(texto);
     setCopiado(true);
     setTimeout(() => setCopiado(false), 2500);
@@ -24,6 +29,9 @@ export default function CredencialesTemporales({
     <div className="rounded-xl border border-green-300 bg-green-50 p-4 text-sm text-green-900">
       <p className="font-semibold">Entrega estas credenciales a {nombre}.</p>
       <p className="mt-1">
+        Distrito: <strong>{distrito}</strong>
+      </p>
+      <p>
         Usuario: <strong>{email}</strong>
       </p>
       <p>

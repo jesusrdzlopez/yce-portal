@@ -1,11 +1,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import { restablecerPasswordUsuario } from "@/lib/usuarios";
+import { restablecerPasswordUsuario, type Credenciales } from "@/lib/usuarios";
 
 export type EstadoRestablecer = {
   error?: string;
-  credenciales?: { nombre: string; email: string; passwordTemporal: string };
+  credenciales?: Credenciales;
 };
 
 export async function restablecerPasswordJoven(
@@ -19,12 +19,5 @@ export async function restablecerPasswordJoven(
     { id: session.user.id, rol: session.user.rol, distritoId: session.user.distritoId },
     String(formData.get("usuarioId") ?? "")
   );
-  if (!resultado.ok) return { error: resultado.error };
-  return {
-    credenciales: {
-      nombre: resultado.nombre,
-      email: resultado.email,
-      passwordTemporal: resultado.passwordTemporal,
-    },
-  };
+  return resultado.ok ? { credenciales: resultado.credenciales } : { error: resultado.error };
 }

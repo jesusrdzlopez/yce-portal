@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
+import PieSitio from "@/components/PieSitio";
 import FormularioPassword from "@/components/FormularioPassword";
 
 export const metadata: Metadata = { title: "Cambiar contraseña | YCE México" };
@@ -22,6 +23,7 @@ export default async function PasswordPage() {
           <FormularioPassword />
         </div>
       </main>
+      <PieSitio />
     </>
   );
 }

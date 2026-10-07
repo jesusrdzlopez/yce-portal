@@ -2,10 +2,11 @@
 
 import { useActionState, useState } from "react";
 import CredencialesTemporales from "@/components/CredencialesTemporales";
+import type { Credenciales } from "@/lib/usuarios";
 
 type Estado = {
   error?: string;
-  credenciales?: { nombre: string; email: string; passwordTemporal: string };
+  credenciales?: Credenciales;
 };
 
 export default function BotonRestablecer({

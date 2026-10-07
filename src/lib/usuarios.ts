@@ -1,11 +1,19 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { generarPasswordTemporal } from "@/lib/password";
+import { etiquetaDistrito } from "@/lib/distritos";
 
 type Solicitante = { id: string; rol: "JOVEN" | "ASESOR" | "NACIONAL"; distritoId: string | null };
 
+export type Credenciales = {
+  nombre: string;
+  distrito: string;
+  email: string;
+  passwordTemporal: string;
+};
+
 export type ResultadoRestablecer =
-  | { ok: true; email: string; nombre: string; passwordTemporal: string }
+  | { ok: true; credenciales: Credenciales }
   | { ok: false; error: string };
 
 /**
@@ -16,7 +24,10 @@ export async function restablecerPasswordUsuario(
   solicitante: Solicitante,
   usuarioId: string
 ): Promise<ResultadoRestablecer> {
-  const objetivo = await prisma.usuario.findUnique({ where: { id: usuarioId } });
+  const objetivo = await prisma.usuario.findUnique({
+    where: { id: usuarioId },
+    include: { distrito: true },
+  });
   if (!objetivo) return { ok: false, error: "Usuario no encontrado." };
 
   const permitido =
@@ -36,5 +47,13 @@ export async function restablecerPasswordUsuario(
     data: { passwordHash: await bcrypt.hash(passwordTemporal, 10), debeCambiarPassword: true },
   });
 
-  return { ok: true, email: objetivo.email, nombre: objetivo.nombre, passwordTemporal };
+  return {
+    ok: true,
+    credenciales: {
+      nombre: objetivo.nombre,
+      distrito: objetivo.distrito ? etiquetaDistrito(objetivo.distrito.nombre) : "Coordinación nacional",
+      email: objetivo.email,
+      passwordTemporal,
+    },
+  };
 }

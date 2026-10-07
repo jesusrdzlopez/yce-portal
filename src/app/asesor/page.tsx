@@ -2,6 +2,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
+import PieSitio from "@/components/PieSitio";
 import Semaforo from "@/components/Semaforo";
 
 export default async function AsesorPage() {
@@ -38,6 +39,7 @@ export default async function AsesorPage() {
           ))}
         </div>
       </main>
+      <PieSitio />
     </>
   );
 }

@@ -11,6 +11,7 @@ import {
   CLASES_SEMAFORO,
 } from "@/lib/catalogos";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
+import PieSitio from "@/components/PieSitio";
 import Semaforo from "@/components/Semaforo";
 import SubidaDocumento from "@/components/SubidaDocumento";
 import InterruptorMenor from "@/components/InterruptorMenor";
@@ -99,6 +100,7 @@ export default async function JovenPage() {
           })}
         </div>
       </main>
+      <PieSitio />
     </>
   );
 }

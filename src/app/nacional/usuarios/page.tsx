@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { etiquetaDistrito } from "@/lib/distritos";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
+import PieSitio from "@/components/PieSitio";
 import FormularioNuevoUsuario from "@/components/FormularioNuevoUsuario";
 import BotonRestablecer from "@/components/BotonRestablecer";
 import { cambiarActivo, restablecerPassword } from "./actions";
@@ -162,6 +163,7 @@ export default async function UsuariosPage({
           </div>
         </section>
       </main>
+      <PieSitio />
     </>
   );
 }

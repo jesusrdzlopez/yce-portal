@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
+import PieSitio from "@/components/PieSitio";
 import AsignarCupo from "@/components/AsignarCupo";
 
 export default async function NacionalPage() {
@@ -38,6 +39,7 @@ export default async function NacionalPage() {
           ))}
         </div>
       </main>
+      <PieSitio />
     </>
   );
 }

@@ -10,6 +10,7 @@ import {
   CLASES_SEMAFORO,
 } from "@/lib/catalogos";
 import EncabezadoPortal from "@/components/EncabezadoPortal";
+import PieSitio from "@/components/PieSitio";
 import Semaforo from "@/components/Semaforo";
 import AccionesDocumento from "@/components/AccionesDocumento";
 import BotonRestablecer from "@/components/BotonRestablecer";
@@ -89,6 +90,7 @@ export default async function DetalleExpedienteAsesor({
           })}
         </div>
       </main>
+      <PieSitio />
     </>
   );
 }
