@@ -96,17 +96,68 @@ async function crearUsuariosDePrueba(password: string) {
   console.log("- joven1@ycemexico.org (JOVEN, B1)");
 }
 
+/**
+ * Recuperación de acceso: deja la cuenta de SEED_NACIONAL_EMAIL como coordinación nacional con
+ * la contraseña de SEED_PASSWORD (que deberá cambiarse al entrar). Si el correo no existe, lo crea.
+ * Solo corre con REINICIAR_NACIONAL=true, es decir, para quien controla las variables del servidor.
+ */
+async function reiniciarNacional(password: string) {
+  const email = (process.env.SEED_NACIONAL_EMAIL ?? "").trim().toLowerCase();
+  if (!email) {
+    throw new Error("Define SEED_NACIONAL_EMAIL para reiniciar la cuenta de coordinación nacional.");
+  }
+
+  const nacionales = await prisma.usuario.findMany({
+    where: { rol: "NACIONAL" },
+    select: { email: true },
+  });
+  console.log(
+    "Cuentas de coordinación nacional existentes:",
+    nacionales.map((u) => u.email).join(", ") || "(ninguna)"
+  );
+
+  const existente = await prisma.usuario.findUnique({ where: { email } });
+  if (existente && existente.rol !== "NACIONAL") {
+    throw new Error(`${email} ya existe con otro rol; usa un correo distinto en SEED_NACIONAL_EMAIL.`);
+  }
+
+  // Una cuenta creada antes con mayúsculas en el correo debe reutilizarse, no duplicarse.
+  const correoGuardado = nacionales.find((u) => u.email.toLowerCase() === email)?.email ?? email;
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  await prisma.usuario.upsert({
+    where: { email: correoGuardado },
+    update: { passwordHash, activo: true, debeCambiarPassword: true },
+    create: {
+      nombre: "Coordinación Nacional",
+      email,
+      passwordHash,
+      rol: "NACIONAL",
+      debeCambiarPassword: true,
+    },
+  });
+  console.log(`Cuenta ${email} reiniciada: entra con la contraseña de SEED_PASSWORD y cámbiala.`);
+}
+
 async function main() {
   await crearDistritos();
 
   if (process.env.LIMPIAR_PRUEBAS === "true") await limpiarPruebas();
 
   const seedPassword = process.env.SEED_PASSWORD;
-  if (!seedPassword || seedPassword.length < 8) {
+  const passwordValida = Boolean(seedPassword && seedPassword.length >= 8);
+
+  if (process.env.REINICIAR_NACIONAL === "true") {
+    if (!passwordValida) throw new Error("REINICIAR_NACIONAL requiere SEED_PASSWORD de 8+ caracteres.");
+    await reiniciarNacional(seedPassword as string);
+    return;
+  }
+
+  if (!passwordValida) {
     console.log("SEED_PASSWORD no definido (mínimo 8 caracteres): no se crean usuarios de prueba.");
     return;
   }
-  await crearUsuariosDePrueba(seedPassword);
+  await crearUsuariosDePrueba(seedPassword as string);
 }
 
 main()
