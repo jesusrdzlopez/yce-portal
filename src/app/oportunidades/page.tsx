@@ -49,9 +49,17 @@ function Lista({ items }: { items: string[] }) {
   );
 }
 
-function Seccion({ titulo, children }: { titulo: string; children: React.ReactNode }) {
+function Seccion({
+  titulo,
+  id,
+  children,
+}: {
+  titulo: string;
+  id?: string;
+  children: React.ReactNode;
+}) {
   return (
-    <section className="mt-14">
+    <section id={id} className="mt-14 scroll-mt-24">
       <h2 className="border-b-2 border-amber-400 pb-2 text-2xl font-bold text-blue-950">{titulo}</h2>
       <div className="mt-5">{children}</div>
     </section>
@@ -129,11 +137,11 @@ export default async function OportunidadesPage() {
                 <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
                 <span>
                   Consulta nuestro{" "}
-                  <Link href="/directorio" className="font-semibold text-blue-800 underline">
-                    directorio
-                  </Link>{" "}
-                  de campamentos o el directorio internacional para ver dónde se ofrecen actualmente
-                  programas de campamentos e intercambios juveniles.
+                  <a href="#lista-de-campamentos" className="font-semibold text-blue-800 underline">
+                    directorio de campamentos
+                  </a>{" "}
+                  o el directorio internacional para ver dónde se ofrecen actualmente programas de
+                  campamentos e intercambios juveniles.
                 </span>
               </li>
               {PASOS_SOLICITUD.map((paso) => (
@@ -146,7 +154,7 @@ export default async function OportunidadesPage() {
           </Seccion>
         </div>
 
-        <Seccion titulo="Lista de campamentos">
+        <Seccion titulo="Lista de campamentos" id="lista-de-campamentos">
           {campamentos && campamentos.length > 0 ? (
             <TablaCampamentos
               columnas={COLUMNAS.map(({ clave, etiqueta }) => ({ clave, etiqueta }))}
