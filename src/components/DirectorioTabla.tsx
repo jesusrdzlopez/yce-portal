@@ -44,7 +44,14 @@ export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] })
                   </span>
                 </td>
                 <td className="px-5 py-4 align-top">
-                  <p className="font-medium text-slate-900">{asesor.nombre}</p>
+                  <p className="font-medium text-slate-900">
+                    {asesor.nombre}
+                    {asesor.coasesor && (
+                      <span className="ml-2 inline-block rounded-md bg-blue-50 px-2 py-0.5 align-middle text-xs font-semibold text-blue-900">
+                        Co-asesor
+                      </span>
+                    )}
+                  </p>
                   <a
                     href={`mailto:${asesor.correo}`}
                     className="mt-1 block break-all text-sm text-blue-800 underline sm:hidden"

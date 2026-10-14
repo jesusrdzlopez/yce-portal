@@ -1,6 +1,6 @@
 import { obtenerFilasHoja } from "@/lib/drive";
 
-export type AsesorICJ = { distrito: string; nombre: string; correo: string };
+export type AsesorICJ = { distrito: string; nombre: string; correo: string; coasesor?: boolean };
 
 export const ID_HOJA_CONTACTO = "1JQQy2rnuzfHQnhPXa8_oT0owaO-LeKJBuV2ElDBNfbI";
 
@@ -28,11 +28,17 @@ export async function obtenerDirectorio(): Promise<AsesorICJ[]> {
   if (!filas) return DIRECTORIO_RESPALDO;
 
   const asesores = filas
-    .map((fila) => ({
-      distrito: (fila[0] ?? "").trim(),
-      nombre: (fila[1] ?? "").trim(),
-      correo: (fila[2] ?? "").trim(),
-    }))
+    .map((fila): AsesorICJ => {
+      const celdaDistrito = (fila[0] ?? "").trim();
+      // Los co-asesores vienen como "B5 co asesor": se separa el distrito de la etiqueta.
+      const coasesor = celdaDistrito.match(/^(.+?)\s+co[\s-]?asesor(a)?$/i);
+      return {
+        distrito: coasesor ? coasesor[1].trim() : celdaDistrito,
+        nombre: (fila[1] ?? "").trim(),
+        correo: (fila[2] ?? "").trim(),
+        ...(coasesor ? { coasesor: true } : {}),
+      };
+    })
     // Descarta el encabezado (su columna C no es un correo) y las filas vacías.
     .filter((a) => a.nombre !== "" && a.correo.includes("@"));
 
