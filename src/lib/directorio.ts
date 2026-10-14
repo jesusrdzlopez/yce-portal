@@ -1,7 +1,7 @@
 export type AsesorICJ = { distrito: string; nombre: string; correo: string };
 
 export const DIRECTORIO: AsesorICJ[] = [
-  { distrito: "B1", nombre: "Adrián Barrios Cumpas", correo: "adryanbarrios123@gmail.com" },
+  { distrito: "B1", nombre: "Jesús Adrián Barrios González", correo: "adryanbarrios123@gmail.com" },
   { distrito: "B2", nombre: "Maria Del Rosario Perez Castaneda", correo: "ma.rosario_6@hotmail.com" },
   { distrito: "B3", nombre: "Patricia Flores", correo: "patriciaflores2@live.com" },
   { distrito: "B4", nombre: "José Ismael Huerta Ledesma", correo: "jismaelhl@gmail.com" },
