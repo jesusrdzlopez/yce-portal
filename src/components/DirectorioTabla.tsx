@@ -36,8 +36,8 @@ export default function DirectorioTabla({ asesores }: { asesores: AsesorICJ[] })
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
-            {filtrados.map((asesor) => (
-              <tr key={asesor.distrito} className="hover:bg-slate-50">
+            {filtrados.map((asesor, i) => (
+              <tr key={`${asesor.distrito}-${asesor.correo}-${i}`} className="hover:bg-slate-50">
                 <td className="px-5 py-4 align-top">
                   <span className="inline-flex h-9 w-12 items-center justify-center rounded-lg bg-amber-100 text-sm font-bold text-blue-900">
                     {asesor.distrito}

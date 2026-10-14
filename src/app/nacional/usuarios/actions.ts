@@ -83,6 +83,34 @@ export async function restablecerPassword(
   return resultado.ok ? { credenciales: resultado.credenciales } : { error: resultado.error };
 }
 
+export type EstadoNombre = { error?: string; guardado?: boolean };
+
+export async function actualizarNombre(
+  _anterior: EstadoNombre,
+  formData: FormData
+): Promise<EstadoNombre> {
+  await exigirNacional();
+
+  const datos = z
+    .object({
+      usuarioId: z.string().min(1),
+      nombre: z.string().trim().min(3, "Escribe el nombre completo.").max(120),
+    })
+    .safeParse({ usuarioId: formData.get("usuarioId"), nombre: formData.get("nombre") });
+  if (!datos.success) return { error: datos.error.issues[0].message };
+
+  const existe = await prisma.usuario.findUnique({ where: { id: datos.data.usuarioId } });
+  if (!existe) return { error: "Usuario no encontrado." };
+
+  await prisma.usuario.update({
+    where: { id: datos.data.usuarioId },
+    data: { nombre: datos.data.nombre },
+  });
+
+  revalidatePath("/nacional/usuarios");
+  return { guardado: true };
+}
+
 export async function cambiarActivo(formData: FormData) {
   const session = await exigirNacional();
   const usuarioId = String(formData.get("usuarioId") ?? "");

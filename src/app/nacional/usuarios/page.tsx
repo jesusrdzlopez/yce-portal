@@ -8,6 +8,7 @@ import EncabezadoPortal from "@/components/EncabezadoPortal";
 import PieSitio from "@/components/PieSitio";
 import FormularioNuevoUsuario from "@/components/FormularioNuevoUsuario";
 import BotonRestablecer from "@/components/BotonRestablecer";
+import EditarNombre from "@/components/EditarNombre";
 import { cambiarActivo, restablecerPassword } from "./actions";
 
 export const metadata: Metadata = { title: "Usuarios | YCE México" };
@@ -125,6 +126,7 @@ export default async function UsuariosPage({
                         {esUnoMismo && <span className="ml-2 text-xs text-slate-500">(tú)</span>}
                       </p>
                       <p className="text-sm text-slate-500">{usuario.email}</p>
+                      <EditarNombre usuarioId={usuario.id} nombre={usuario.nombre} />
                       <p className="mt-1 text-xs text-slate-500">
                         {NOMBRE_ROL[usuario.rol]}
                         {usuario.distrito && ` · ${etiquetaDistrito(usuario.distrito.nombre)}`}

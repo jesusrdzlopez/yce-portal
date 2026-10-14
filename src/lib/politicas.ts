@@ -858,7 +858,7 @@ export const FIRMAS = [
 ];
 
 export const APROBACION = [
-  { distrito: "B1", gobernador: "C.L. Francisco Javier Pérez Ramos", asesor: "C.L. Adrián Barrios Cumpas" },
+  { distrito: "B1", gobernador: "C.L. Francisco Javier Pérez Ramos", asesor: "C.L. Jesús Adrián Barrios González" },
   { distrito: "B2", gobernador: "C.L. María Engracia Barbosa Rodríguez", asesor: "C.L. María Del Rosario Pérez Castaneda" },
   { distrito: "B3", gobernador: "C.L. Rosa María Alvarado Monroy", asesor: "C.L. Patricia Flores" },
   { distrito: "B4", gobernador: "C.L. Simón Gutiérrez Rosas", asesor: "C.L. José Ismael Huerta Ledesma" },
