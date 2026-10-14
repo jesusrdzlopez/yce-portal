@@ -8,6 +8,6 @@ export function enlaceVistaDrive(id: string) {
   return `https://drive.google.com/file/d/${id}/view`;
 }
 
-export function urlImagenDrive(id: string, ancho = 1600) {
+export function urlImagenDrive(id: string, ancho = 1280) {
   return `https://drive.google.com/thumbnail?id=${id}&sz=w${ancho}`;
 }
