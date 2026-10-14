@@ -5,6 +5,7 @@ import PieSitio from "@/components/PieSitio";
 const ENLACES = [
   { href: "/", texto: "Inicio" },
   { href: "/programa", texto: "El programa" },
+  { href: "/oportunidades", texto: "Oportunidades de intercambio" },
   { href: "/documentos", texto: "Documentos" },
   { href: "/directorio", texto: "Directorio" },
   { href: "/politicas", texto: "Políticas generales del programa" },
@@ -20,7 +21,7 @@ export default function SitioPublico({
   return (
     <>
       <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logos/lions-international.webp"
@@ -36,7 +37,7 @@ export default function SitioPublico({
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-0.5 xl:flex">
             {ENLACES.map((enlace) => (
               <Link
                 key={enlace.href}
@@ -60,7 +61,7 @@ export default function SitioPublico({
           </Link>
         </div>
 
-        <nav className="flex flex-wrap justify-center gap-1 border-t border-slate-100 px-2 py-1 lg:hidden">
+        <nav className="flex flex-wrap justify-center gap-1 border-t border-slate-100 px-2 py-1 xl:hidden">
           {ENLACES.map((enlace) => (
             <Link
               key={enlace.href}
