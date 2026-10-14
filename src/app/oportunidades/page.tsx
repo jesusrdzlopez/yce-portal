@@ -27,14 +27,9 @@ const RESPONSABLE_FAMILIA = [
   "El dinero para gastos personales",
 ];
 
-const PASOS_SOLICITUD = [
-  "Toma en cuenta los requisitos y las fechas límite para enviar la solicitud.",
-  "Prepara una pequeña lista de países a los que te interesaría ir.",
-  "Comunícate con el club de Leones local para solicitar que sea tu club patrocinador.",
-  "Comunícate con el asesor del programa del distrito al que pertenece el club patrocinador para verificar la elegibilidad y empiecen a preparar tu expediente.",
-  "Las solicitudes se iniciarán exclusivamente con el asesor distrital para que posteriormente sean autorizadas por el asesor nacional.",
-  "Ningún trámite se iniciará sin haber cubierto la cuota de participación nacional.",
-];
+// Recurso oficial de Lions International: al abrirlo descarga el directorio internacional (XLSX).
+const ENLACE_DIRECTORIO_INTERNACIONAL = "https://www.lionsclubs.org/resources/98083860";
+const ENLACE_BUSCADOR_CLUBES = "https://www.lionsclubs.org/es/start-our-approach/club-locator";
 
 function Lista({ items }: { items: string[] }) {
   return (
@@ -133,21 +128,52 @@ export default async function OportunidadesPage() {
 
           <Seccion titulo="¿Cómo hacer la solicitud?">
             <ul className="space-y-2.5">
-              <li className="flex gap-3 leading-relaxed text-slate-700">
-                <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                <span>
+              {[
+                <>
                   Consulta nuestro{" "}
                   <a href="#lista-de-campamentos" className="font-semibold text-blue-800 underline">
                     directorio de campamentos
                   </a>{" "}
-                  o el directorio internacional para ver dónde se ofrecen actualmente programas de
-                  campamentos e intercambios juveniles.
-                </span>
-              </li>
-              {PASOS_SOLICITUD.map((paso) => (
-                <li key={paso} className="flex gap-3 leading-relaxed text-slate-700">
+                  o el{" "}
+                  <a
+                    href={ENLACE_DIRECTORIO_INTERNACIONAL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-800 underline"
+                  >
+                    directorio internacional
+                  </a>{" "}
+                  para ver dónde se ofrecen actualmente programas de campamentos e intercambios
+                  juveniles.
+                </>,
+                "Toma en cuenta los requisitos y las fechas límite para enviar la solicitud.",
+                "Prepara una pequeña lista de países a los que te interesaría ir.",
+                <>
+                  Comunícate con el{" "}
+                  <a
+                    href={ENLACE_BUSCADOR_CLUBES}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-800 underline"
+                  >
+                    club de Leones local
+                  </a>{" "}
+                  para solicitar que sea tu club patrocinador.
+                </>,
+                <>
+                  Comunícate con el{" "}
+                  <Link href="/directorio" className="font-semibold text-blue-800 underline">
+                    asesor del programa del distrito
+                  </Link>{" "}
+                  al que pertenece el club patrocinador para verificar la elegibilidad y empiecen a
+                  preparar tu expediente.
+                </>,
+                "Las solicitudes se iniciarán exclusivamente con el asesor distrital para que posteriormente sean autorizadas por el asesor nacional.",
+                "Ningún trámite se iniciará sin haber cubierto la cuota de participación nacional.",
+              ].map((paso, i) => (
+                <li key={i} className="flex gap-3 leading-relaxed text-slate-700">
                   <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                  {paso}
+                  <span>{paso}</span>
                 </li>
               ))}
             </ul>
